@@ -2,15 +2,13 @@ package com.esgi.fileExplorer
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.FrameLayout
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,10 +26,22 @@ class MainActivity : AppCompatActivity() {
     private var files: Array<String> = emptyArray()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 0)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            this.init()
+        } else {
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 0)
+        }
+    }
 
+    override fun onRequestPermissionsResult( requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if(requestCode == 0){
+            if(!grantResults.contains(PackageManager.PERMISSION_DENIED)) this.init()
+        }
+    }
+
+    private fun init(){
         this.path = this.originPath
         val tmpList = File(path).listFiles()
         this.files = File(path).list()!!
@@ -41,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         viewAdapter = RecyclerAdapter(dataset = this.files as Array<String>, onClickListener = this::onClickItem)
         viewManager = LinearLayoutManager(this)
 
-        this.recyclerView = findViewById<RecyclerView>(R.id.filesRecyclerView)
+        this.recyclerView = findViewById(R.id.filesRecyclerView)
         recyclerView.apply {
             layoutManager = viewManager
             adapter = viewAdapter
@@ -84,29 +94,26 @@ class MainActivity : AppCompatActivity() {
             for(i in tmpList.indices){
                 this.files[i] = tmpList[i].absolutePath
             }
-            if(this.files.isNullOrEmpty() && tmp.isDirectory){
+            if(this.files.isNullOrEmpty()){
                 println("EMPTY")
                 recyclerView.adapter = EmptyAdapter()
-            } else if(tmp.isDirectory){
+            } else {
                 Arrays.sort(this.files)
                 recyclerView.adapter = RecyclerAdapter(this.files, this::onClickItem)
                 println("FILES SIZE -> "+ this.files.size)
             }
             viewAdapter.notifyDataSetChanged()
-        } else {
-            if(tmp.isFile){
-                val openFile = Intent(Intent.ACTION_VIEW)
-                var fileUri = FileProvider.getUriForFile(applicationContext, applicationContext.packageName + ".provider", tmp)
-                openFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-                openFile.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-                openFile.setData(fileUri)
-                val open = Intent.createChooser(openFile, "Open with : ")
-                try {
-                    startActivity(open)
-                } catch (e: ActivityNotFoundException) {
-                    println(e.localizedMessage)
-                }
-                this.path = tmp.parentFile.absolutePath
+        } else if(tmp.isFile){
+            val openFile = Intent(Intent.ACTION_VIEW)
+            var fileUri = FileProvider.getUriForFile(applicationContext, applicationContext.packageName + ".provider", tmp)
+            openFile.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            openFile.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            openFile.setData(fileUri)
+            val open = Intent.createChooser(openFile, "Open with : ")
+            try {
+                startActivity(open)
+            } catch (e: ActivityNotFoundException) {
+                println(e.localizedMessage)
             }
             this.path = tmp.parentFile.absolutePath
         }
