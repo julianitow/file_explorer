@@ -1,0 +1,36 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="472.2dp"
+    android:height="472.2dp"
+    android:viewportWidth="472.2"
+    android:viewportHeight="472.2">
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M434.8,102.9H202.4V62c0,-17.9 -14.6,-32.5 -32.5,-32.5H12c-6.6,0 -12,5.4 -12,12v373c0,15.6 12.7,28.2 28.2,28.2H444c15.6,0 28.2,-12.7 28.2,-28.2V140.3C472.2,119.6 455.4,102.9 434.8,102.9zM448.2,414.5c0,2.3 -1.9,4.2 -4.2,4.2H28.2c-2.3,0 -4.2,-1.9 -4.2,-4.2v-361h145.9c4.7,0 8.5,3.8 8.5,8.5v52.9c0,6.6 5.4,12 12,12h244.5c7.4,0 13.4,6 13.4,13.4v274.2H448.2z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M56.8,205.1c-6.6,0 -12,5.4 -12,12s5.4,12 12,12s12,-5.4 12,-12S63.4,205.1 56.8,205.1z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M236.1,205.1c-6.6,0 -12,5.4 -12,12s5.4,12 12,12s12,-5.4 12,-12S242.7,205.1 236.1,205.1z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M191.3,205.1c-6.6,0 -12,5.4 -12,12s5.4,12 12,12s12,-5.4 12,-12S197.9,205.1 191.3,205.1z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M101.6,205.1c-6.6,0 -12,5.4 -12,12s5.4,12 12,12c6.6,0 12,-5.4 12,-12S108.2,205.1 101.6,205.1z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M146.4,205.1c-6.6,0 -12,5.4 -12,12s5.4,12 12,12s12,-5.4 12,-12S153.1,205.1 146.4,205.1z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M370.6,205.1c-6.6,0 -12,5.4 -12,12s5.4,12 12,12s12,-5.4 12,-12S377.2,205.1 370.6,205.1z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M415.4,205.1c-6.6,0 -12,5.4 -12,12s5.4,12 12,12s12,-5.4 12,-12S422,205.1 415.4,205.1z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M280.9,205.1c-6.6,0 -12,5.4 -12,12s5.4,12 12,12s12,-5.4 12,-12S287.6,205.1 280.9,205.1z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M325.7,205.1c-6.6,0 -12,5.4 -12,12s5.4,12 12,12s12,-5.4 12,-12S332.4,205.1 325.7,205.1z"/>
+</vector>
